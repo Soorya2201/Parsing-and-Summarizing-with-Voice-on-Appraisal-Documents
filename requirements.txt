@@ -1,0 +1,5 @@
+pdfplumber
+PyPDF2
+openai-whisper gtts
+pytesseract
+pdf2image
