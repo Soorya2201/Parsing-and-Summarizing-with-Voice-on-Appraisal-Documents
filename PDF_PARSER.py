@@ -6,7 +6,6 @@ from typing import Dict, List, Optional
 import PyPDF2
 import pdfplumber
 from pathlib import Path
-from IPython.display import Audio
 
 class AppraisalReportParser:
     
@@ -353,9 +352,11 @@ class OCRAppraisalParser(AppraisalReportParser):
         return text
 
 if __name__ == "__main__":
-    parser = AppraisalReportParser("/content/Appraisal-Report.pdf")
+    import sys
+    pdf_path = sys.argv[1] if len(sys.argv) > 1 else "Appraisal-Report.pdf"
+    parser = OCRAppraisalParser(pdf_path)   # falls back to OCR for scanned PDFs
     data = parser.parse()
     parser.print_summary()
     parser.save_json("appraisal_data.json")
-    parser.save_csv("")
+    parser.save_csv("appraisal_tables")
     
